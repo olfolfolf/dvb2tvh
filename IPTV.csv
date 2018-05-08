@@ -1,3 +1,4 @@
 nr,tvg-name,tvg-id,group-title,tvg-logo,url
-9,Das Erste HD,ARD.de,IPTV,https://raw.githubusercontent.com/jnk22/kodinerds-iptv/master/logos/tv/daserste.png,http://192.168.100.15:7522/upnp/channelstream/2359890582721931325%7CDas%20Erste%20HD.ts
+1,Das Erste HD,ARD.de,IPTV,https://raw.githubusercontent.com/jnk22/kodinerds-iptv/master/logos/tv/daserste.png,http://192.168.100.15:7522/upnp/channelstream/2359890582721931325%7CDas%20Erste%20HD.ts
 2,ZDF HD,ZDF.de,IPTV,https://raw.githubusercontent.com/jnk22/kodinerds-iptv/master/logos/tv/zdfhd.png,http://192.168.100.15:7522/upnp/channelstream/2359890548428909414%7CZDF%20HD.ts
+3,Sky Sport Bundesliga 1 HD,SkyBundesliga.de,IPTV,,http://192.168.100.15:7522/upnp/channelstream/2360449207325818985%7CSky%20Sport%20Bundesliga%201%20HD.ts
