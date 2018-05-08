@@ -8,6 +8,7 @@ Param(
 
 Add-Type -AssemblyName System.Web
 
+# check input
 If (!$InputCSV) {
 	Write-Error 'Parameter -InputCSV not set!'
 	exit 0
@@ -20,20 +21,24 @@ If (!$InputCSV) {
 	}
 }
 
-[System.IO.File]::WriteAllText($InputCSV [System.IO.File]::ReadAllText($InputCSV).Replace(';', ','), [text.encoding]::UTF8)
-$Channels = Import-Csv -Delimiter "," -Path $InputCSV | Sort -Property 'nr'
+# in case CSV is separated by semicolon (f.e. german Excel)
+(Get-Content $InputCSV).replace(';', ',') | Set-Content $InputCSV
 
+# import and sort CSV
+$Playlist = Import-Csv -Delimiter "," -Path $InputCSV | Sort -Property 'nr'
+
+# new file / override old file
 $Header = '#EXTM3U'
 Write-Host $Header
 Set-Content -Path $Output -Value $Header
 
-ForEach ($Channel in $Channels){ 
-	$tvg_name = $Channel.'tvg-name'
-	$tvg_id = $Channel.'tvg-id'
-	$group_title = $Channel.'group-title'
-	$tvg_logo = [System.Web.HttpUtility]::UrlDecode($Channel.'tvg-logo')
-	$stream = [System.Web.HttpUtility]::UrlDecode($Channel.url)
-	$service_name = $tvg_name.Replace(" ", "\ ")
+ForEach ($Channel in $Playlist){ 
+	$tvg_name         = $Channel.'tvg-name'
+	$tvg_id           = $Channel.'tvg-id'
+	$group_title      = $Channel.'group-title'
+	$tvg_logo         = [System.Web.HttpUtility]::UrlDecode($Channel.'tvg-logo')
+	$stream           = [System.Web.HttpUtility]::UrlDecode($Channel.url)
+	$service_name     = $tvg_name.Replace(" ", "\ ")
 	$service_provider = $group_title.Replace(" ", "\ ")
 
 	$Line = '#EXTINF:-1 tvg-name="{0}" tvg-id="{1}" group-title="{2}" tvg-logo="{3}",{4}' -f $tvg_name, $tvg_id, $group_title, $tvg_logo, $tvg_name
