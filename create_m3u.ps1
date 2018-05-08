@@ -20,6 +20,7 @@ If (!$InputCSV) {
 	}
 }
 
+(Get-Content $InputCSV) -replace (';',',') | Out-File $InputCSV
 $Channels = Import-Csv -Delimiter "," -Path $InputCSV | Sort -Property 'nr'
 
 $Header = '#EXTM3U'
