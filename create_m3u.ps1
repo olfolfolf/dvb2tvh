@@ -8,7 +8,6 @@ Param(
 
 Add-Type -AssemblyName System.Web
 
-# $InputCSV = 'C:\Users\ap04\Desktop\IP\IPTV.csv'
 If (!$InputCSV) {
 	Write-Error 'Parameter -InputCSV not set!'
 	exit 0
