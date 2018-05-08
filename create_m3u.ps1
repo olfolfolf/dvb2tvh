@@ -20,7 +20,7 @@ If (!$InputCSV) {
 	}
 }
 
-$Channels = Import-Csv -Delimiter ";" -Path $InputCSV | Sort -Property 'nr'
+$Channels = Import-Csv -Delimiter "," -Path $InputCSV | Sort -Property 'nr'
 
 $Header = '#EXTM3U'
 Write-Host $Header
