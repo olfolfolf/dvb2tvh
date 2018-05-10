@@ -39,11 +39,10 @@ ForEach ($Channel in $Playlist){
 	$tvg_name         = $Channel.'tvg-name'
 	$tvg_id           = $Channel.'tvg-id'
 	$group_title      = $Channel.'group-title'
-	#$tvg_logo         = [System.Web.HttpUtility]::UrlDecode($Channel.'tvg-logo')
-	#$stream           = [System.Web.HttpUtility]::UrlDecode($Channel.url)
-	# TVH does not like decoded URLs
 	$tvg_logo         = $Channel.'tvg-logo'
+	#$tvg_logo         = [System.Web.HttpUtility]::UrlDecode($Channel.'tvg-logo')
 	$stream           = $Channel.url
+	#$stream           = [System.Web.HttpUtility]::UrlDecode($Channel.url)
 	$service_name     = $tvg_name.Replace(" ", "\ ")
 	$service_provider = $group_title.Replace(" ", "\ ")
 
