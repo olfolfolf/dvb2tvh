@@ -32,6 +32,9 @@ $Header = '#EXTM3U'
 Write-Host $Header
 Set-Content -Path $Output -Value $Header
 
+# channel number for TVH
+$channel_id = 1
+
 ForEach ($Channel in $Playlist){ 
 	$tvg_name         = $Channel.'tvg-name'
 	$tvg_id           = $Channel.'tvg-id'
@@ -44,7 +47,7 @@ ForEach ($Channel in $Playlist){
 	$service_name     = $tvg_name.Replace(" ", "\ ")
 	$service_provider = $group_title.Replace(" ", "\ ")
 
-	$Line = '#EXTINF:-1 tvg-name="{0}" tvg-id="{1}" group-title="{2}" tvg-logo="{3}",{4}' -f $tvg_name, $tvg_id, $group_title, $tvg_logo, $tvg_name
+	$Line = '#EXTINF:-1 tvh-chnum="{5}" tvg-name="{0}" tvg-id="{1}" group-title="{2}" tvg-logo="{3}",{4}' -f $tvg_name, $tvg_id, $group_title, $tvg_logo, $tvg_name, $channel_id
 	Write-Host $Line
 	Add-Content -Path $Output -Value $Line
 	
@@ -52,4 +55,7 @@ ForEach ($Channel in $Playlist){
 	$Line = 'pipe:///usr/bin/ffmpeg -loglevel fatal -i {0} -vcodec copy -acodec copy -metadata service_name={1} -metadata service_provider={2} -f mpegts -tune zerolatency pipe:1' -f $stream, $service_name, $service_provider
 	Write-Host $Line
 	Add-Content -Path $Output -Value $Line
+
+	# increase channel number
+	$channel_id++
 }
