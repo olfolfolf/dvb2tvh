@@ -11,11 +11,11 @@ Add-Type -AssemblyName System.Web
 # check input
 If (!$InputCSV) {
 	Write-Error 'Parameter -InputCSV not set!'
-	exit 0
+	Exit 0
 } Else {
 	If (-Not (Test-Path $InputCSV)) {
 		Write-Error $($InputCSV+' does not exist!')
-		exit 0
+		Exit 0
 	} Else {
 		$Output = $InputCSV+'.m3u'
 	}
