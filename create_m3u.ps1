@@ -21,7 +21,7 @@ If (!$InputCSV) {
 	}
 }
 
-# in case CSV is separated by semicolon (f.e. german Excel)
+# in case CSV is separated by semicolon (f.e. German Excel)
 (Get-Content $InputCSV).replace(';', ',') | Set-Content $InputCSV
 
 # import and sort CSV
@@ -33,7 +33,7 @@ Write-Host $Header
 Set-Content -Path $Output -Value $Header
 
 # channel number for TVH
-$channel_id = 1
+$tvh_chnum = 1
 
 ForEach ($Channel in $Playlist){ 
 	$tvg_name         = $Channel.'tvg-name'
@@ -46,7 +46,7 @@ ForEach ($Channel in $Playlist){
 	$service_name     = $tvg_name.Replace(" ", "\ ")
 	$service_provider = $group_title.Replace(" ", "\ ")
 
-	$Line = '#EXTINF:-1 tvh-chnum="{5}" tvg-name="{0}" tvg-id="{1}" group-title="{2}" tvg-logo="{3}",{4}' -f $tvg_name, $tvg_id, $group_title, $tvg_logo, $tvg_name, $channel_id
+	$Line = '#EXTINF:-1 tvh-chnum="{5}" tvg-name="{0}" tvg-id="{1}" group-title="{2}" tvg-logo="{3}",{4}' -f $tvg_name, $tvg_id, $group_title, $tvg_logo, $tvg_name, $tvh_chnum
 	Write-Host $Line
 	Add-Content -Path $Output -Value $Line
 	
@@ -56,5 +56,5 @@ ForEach ($Channel in $Playlist){
 	Add-Content -Path $Output -Value $Line
 
 	# increase channel number
-	$channel_id++
+	$tvh_chnum++
 }
